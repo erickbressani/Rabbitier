@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SampleServer.Entities;
+using System;
 using System.Threading;
 
 namespace SampleServer
@@ -7,7 +8,6 @@ namespace SampleServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             var consumer = new ConcreteConsumer();
             consumer.Start();
         }

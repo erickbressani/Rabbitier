@@ -1,6 +1,4 @@
 ﻿using RabbitMQ.Client;
-using System;
-using System.Linq;
 using System.Text;
 
 namespace Rabbitier.Publisher

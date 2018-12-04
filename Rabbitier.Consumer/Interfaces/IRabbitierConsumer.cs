@@ -1,11 +1,9 @@
-﻿using RabbitMQ.Client.Events;
-
-namespace Rabbitier.Consumer
+﻿namespace Rabbitier.Consumer
 {
-    public interface IRabbitierConsumer
+    public interface IRabbitierConsumer<TMessage> where TMessage : new()
     {
-        void Stop();
         void Start();
-        void Consume(BasicDeliverEventArgs args);
+        void Stop();
+        void Consume(MessageReceived<TMessage> message);
     }
 }

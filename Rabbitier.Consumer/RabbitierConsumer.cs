@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rabbitier.Consumer
 {
-    public abstract class RabbitierConsumer : IRabbitierConsumer
+    public abstract class RabbitierConsumer<TMessage> where TMessage : new()
     {
         private readonly Subscription _subscription;
         private readonly ConsumerSettings _consumerSettings;
@@ -24,9 +24,6 @@ namespace Rabbitier.Consumer
             _subscription = rabbitierConnectionFactory.CreateSubscription(_consumerSettings);
         }
 
-        public void Stop()
-            => _enabled = false;
-
         public void Start()
         {
             _enabled = true;
@@ -37,18 +34,27 @@ namespace Rabbitier.Consumer
         {
             while (_enabled)
             {
-                var deliveryArgs = _subscription.Next();
-                Consume(deliveryArgs);
+                BasicDeliverEventArgs args = _subscription.Next();
+                Consume(args);
 
                 if (!_consumerSettings.NoAck)
-                    _subscription.Ack(deliveryArgs);
+                    _subscription.Ack(args);
             }
         }
+
+        private void Consume(BasicDeliverEventArgs args)
+        {
+            var messageReceived = new MessageReceived<TMessage>(args);
+            Consume(messageReceived);
+        }
+
+        public void Stop()
+            => _enabled = false;
 
         private ConsumerSettings GetConsumerSettings()
             => GetType().GetCustomAttributes(typeof(ConsumerSettings), true)
                         .FirstOrDefault() as ConsumerSettings;
 
-        public abstract void Consume(BasicDeliverEventArgs args);
+        public abstract void Consume(MessageReceived<TMessage> message);
     }
 }

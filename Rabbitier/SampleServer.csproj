@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Rabbitier.Configuration\Rabbitier.Configuration.csproj" />
     <ProjectReference Include="..\Rabbitier.Consumer\Rabbitier.Consumer.csproj" />
   </ItemGroup>

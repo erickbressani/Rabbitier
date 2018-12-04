@@ -3,7 +3,7 @@ using Sample.Domain;
 
 namespace SampleClient
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {

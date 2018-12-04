@@ -1,10 +1,10 @@
 ﻿namespace SampleServer
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            var consumer = new ConcreteConsumer2();
+            var consumer = new ConcreteConsumerWithoutAck();
             consumer.Start();
         }
     }

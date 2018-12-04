@@ -42,6 +42,7 @@ Subscriber Abstraction for RabbitMQ
 
 In order to create any subscriber your subscriber class just have to inherite from RabbitierSubscriber<TMessage> and add the custom attribute [SubscriberSettings(string queueName)]
   
+```
 > RabbitierSubscriber<TMessage>: TMessage is the type you want to convert the incoming message (this early version is only converting object from Json)
 	
 > [SubscriberSettings(...)]: Contains all the default parameters from RabbitMQ,
@@ -50,7 +51,8 @@ In order to create any subscriber your subscriber class just have to inherite fr
                               uint prefetchSize = 0, 
                               ushort prefetchCount = 1, 
                               bool global = false
-  
+```
+
 Subscriber classes samples:
 ```
 [SubscriberSettings("SampleQueue1")]

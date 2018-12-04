@@ -60,6 +60,7 @@ public class ConcreteSubscriberWithAck : RabbitierSubscriber<Product>
 {
     public override void Consume(MessageReceived<Product> message) 
     {
+    	...
     }
 }
 
@@ -68,6 +69,7 @@ public class ConcreteSubscriberWithoutAck : RabbitierSubscriber<Product>
 {
     public override void Consume(MessageReceived<Product> message)
     {
+    	...
     }
 }
 ```

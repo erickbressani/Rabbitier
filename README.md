@@ -94,11 +94,11 @@ Parameter: MessageReceived<TMessage>
  - Wraps the information send by RabbitMQ
  - Properties:  
 	- TMessage JsonParsedBody 
-        - byte[] Body
-        - string Exchange
-        - string ConsumerTag
-        - string RoutingKey
-        - ulong DeliveryTag
+	- byte[] Body
+	- string Exchange
+	- string ConsumerTag
+	- string RoutingKey
+	- ulong DeliveryTag
 	- bool Redelivered
   
 ## Configuration

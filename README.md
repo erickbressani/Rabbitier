@@ -93,13 +93,13 @@ Method: Consume(MessageReceived<TMessage> message)
 Parameter: MessageReceived<TMessage>
  - Wraps the information send by RabbitMQ
  - Properties:  
-	- TMessage JsonParsedBody 
-	- byte[] Body
-	- string Exchange
-	- string ConsumerTag
-	- string RoutingKey
-	- ulong DeliveryTag
-	- bool Redelivered
+	- JsonParsedBody: TMessage 
+	- Body: byte[] 
+	- Exchange: string 
+	- ConsumerTag: string 
+	- RoutingKey: string 
+	- DeliveryTag: ulong 
+	- Redelivered: bool 
   
 ## Configuration
 In order to work, your client needs to have an appsettings.json with the following settings:

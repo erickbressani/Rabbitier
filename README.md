@@ -88,7 +88,7 @@ subscriber.Stop();
 
 Method: Consume(MessageReceived<TMessage> message)
  - This method is inherited from RabbitierSubscriber;
- - It is called every time a message is sent to the bound queue, only if the subscriber is started;
+ - If the subscriber is started and running it is called every time a message is send to the bound queue;
   
 Parameter: MessageReceived<TMessage>
  - Wraps the information send by RabbitMQ

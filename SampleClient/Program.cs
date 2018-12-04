@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rabbitier.Publisher;
+using Sample.Domain;
 
 namespace SampleClient
 {
@@ -6,7 +7,16 @@ namespace SampleClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var product = new Product()
+            {
+                Id = 1,
+                Description = "TestFooBar"
+            };
+
+            RabbitierPublisher.CreateWith()
+                              .RoutingKey("SampleQueue1")
+                              .Body(product)
+                              .Publish();
         }
     }
 }

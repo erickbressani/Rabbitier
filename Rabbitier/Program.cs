@@ -1,8 +1,4 @@
-﻿using SampleServer.Entities;
-using System;
-using System.Threading;
-
-namespace SampleServer
+﻿namespace SampleServer
 {
     class Program
     {

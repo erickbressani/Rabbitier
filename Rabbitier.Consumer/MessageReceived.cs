@@ -1,4 +1,4 @@
-﻿using Rabbitier.Consumer.Parsers;
+﻿using Rabbitier.Configuration.Parsers;
 using RabbitMQ.Client.Events;
 
 namespace Rabbitier.Consumer

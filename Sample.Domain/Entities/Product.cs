@@ -1,4 +1,4 @@
-﻿namespace SampleServer.Entities
+﻿namespace Sample.Domain
 {
     public class Product
     {

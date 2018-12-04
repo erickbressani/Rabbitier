@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Rabbitier.Configuration\Rabbitier.Configuration.csproj" />
     <ProjectReference Include="..\Rabbitier.Consumer\Rabbitier.Consumer.csproj" />
+    <ProjectReference Include="..\Sample.Domain\Sample.Domain.csproj" />
   </ItemGroup>
 
 </Project>

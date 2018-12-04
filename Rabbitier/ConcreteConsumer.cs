@@ -1,6 +1,6 @@
 ﻿using Rabbitier.Configuration;
 using Rabbitier.Consumer;
-using SampleServer.Entities;
+using Sample.Domain;
 
 namespace SampleServer
 {

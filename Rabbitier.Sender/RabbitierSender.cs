@@ -1,21 +1,17 @@
-﻿using RabbitMQ.Client;
+﻿using Rabbitier.Configuration;
+using Rabbitier.Configuration.Parsers;
+using RabbitMQ.Client;
 using System.Text;
 
 namespace Rabbitier.Publisher
 {
     public class RabbitierPublisher
     {
-        private string _exchange;
-        private string _routingKey;
-        private bool _mandatory;
-        private bool _immediate;
-        private byte[] _body;
-        private IBasicProperties _basicProperties;
-        private IModel _model;
+        private PublishData _publishData;
 
         private RabbitierPublisher()
         {
-
+            _publishData = new PublishData();
         }
 
         public static RabbitierPublisher CreateWith()
@@ -23,7 +19,7 @@ namespace Rabbitier.Publisher
 
         public RabbitierPublisher Exchange(string exchange)
         {
-            _exchange = exchange;
+            _publishData.Exchange = exchange;
             return this;
         }
 
@@ -32,49 +28,76 @@ namespace Rabbitier.Publisher
 
         public RabbitierPublisher RoutingKey(string routingKey)
         {
-            _routingKey = routingKey;
+            _publishData.RoutingKey = routingKey;
             return this;
         }
 
         public RabbitierPublisher RoutingKey(params object[] routingKey)
         {
-            _routingKey = string.Join('.', routingKey);
+            _publishData.RoutingKey = string.Join('.', routingKey);
             return this;
         }
 
         public RabbitierPublisher IsMandatory()
         {
-            _mandatory = true;
+            _publishData.Mandatory = true;
             return this;
         }
 
         public RabbitierPublisher IsImmediate()
         {
-            _immediate = true;
+            _publishData.Immediate = true;
             return this;
         }
 
-        public RabbitierPublisher BasicProperties(IBasicProperties basicProperties)
+        public RabbitierPublisher IsPersistent()
         {
-            _basicProperties = basicProperties;
+            _publishData.IsPersistent = true;
             return this;
         }
 
-        public RabbitierPublisher Body(string body)
+        public Publisher Body(object body)
         {
-            _body = Encoding.Default.GetBytes(body);
-            return this;
+            var parsedBody = Json.ParseToJson(body);
+            return Body(parsedBody);
         }
 
-        public RabbitierPublisher Body(byte[] body)
+        public Publisher Body(string body)
         {
-            _body = body;
-            return this;
+            var parsedBody = Encoding.Default.GetBytes(body);
+            return Body(parsedBody);
         }
 
-        public void Publish()
+        public Publisher Body(byte[] body)
         {
-            _model.BasicPublish(_exchange, _routingKey, _basicProperties, _body);
+            _publishData.Body = body;
+            return new Publisher(_publishData);
+        }
+
+        public class Publisher
+        {
+            private PublishData _publishData;
+            private IModel _model;
+            private IBasicProperties _properties;
+
+            internal Publisher(PublishData publishData)
+            {
+                var rabbitierConnector = new RabbitierConnector();
+                _model = rabbitierConnector.CreateModel();
+                _publishData = publishData;
+            }
+
+            private void SetProperties()
+            {
+                _properties = _model.CreateBasicProperties();
+                _properties.Persistent = _publishData.IsPersistent;
+            }
+
+            public void Publish()
+                => _model.BasicPublish(_publishData.Exchange,
+                                       _publishData.RoutingKey,
+                                       _properties,
+                                       _publishData.Body);
         }
     }
 }

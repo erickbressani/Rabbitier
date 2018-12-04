@@ -14,16 +14,15 @@ namespace Rabbitier.Configuration
 
         public Subscription CreateSubscription(ConsumerSettings consumerSettings)
         {
-            IModel model = CreateModel(consumerSettings);
+            IModel model = CreateModel();
+            model.BasicQos(consumerSettings.PrefetchSize, consumerSettings.PrefetchCount, consumerSettings.Global);
             return new Subscription(model, consumerSettings.QueueName, consumerSettings.NoAck);
         }
 
-        private IModel CreateModel(ConsumerSettings consumerSettings)
+        public IModel CreateModel()
         {
             var connection = CreateConnection();
-            IModel model = connection.CreateModel();
-            model.BasicQos(consumerSettings.PrefetchSize, consumerSettings.PrefetchCount, consumerSettings.Global);
-            return model;
+            return connection.CreateModel();
         }
 
         private IConnection CreateConnection()

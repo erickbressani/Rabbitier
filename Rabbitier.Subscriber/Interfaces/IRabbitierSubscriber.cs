@@ -1,6 +1,6 @@
-﻿namespace Rabbitier.Consumer
+﻿namespace Rabbitier.Subscriber
 {
-    public interface IRabbitierConsumer<TMessage> where TMessage : new()
+    public interface IRabbitierSubscriber<TMessage> where TMessage : new()
     {
         void Start();
         void Stop();

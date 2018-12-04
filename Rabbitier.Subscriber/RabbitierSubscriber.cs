@@ -5,23 +5,23 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rabbitier.Consumer
+namespace Rabbitier.Subscriber
 {
-    public abstract class RabbitierConsumer<TMessage> where TMessage : new()
+    public abstract class RabbitierSubscriber<TMessage> where TMessage : new()
     {
         private readonly Subscription _subscription;
-        private readonly ConsumerSettings _consumerSettings;
+        private readonly SubscriberSettings _subscriberSettings;
         private bool _enabled;
 
-        public RabbitierConsumer()
+        public RabbitierSubscriber()
         {
-            _consumerSettings = GetConsumerSettings();
+            _subscriberSettings = GetSubscriberSettings();
 
-            if (_consumerSettings == null)
+            if (_subscriberSettings == null)
                 throw new ArgumentException($"{GetType()} needs to have the ConsumerSettings attribute.");
 
             var rabbitierConnectionFactory = new RabbitierConnector();
-            _subscription = rabbitierConnectionFactory.CreateSubscription(_consumerSettings);
+            _subscription = rabbitierConnectionFactory.CreateSubscription(_subscriberSettings);
         }
 
         public void Start()
@@ -48,16 +48,16 @@ namespace Rabbitier.Consumer
 
         private void AcknowledgeIfNecessary(BasicDeliverEventArgs args)
         {
-            if (!_consumerSettings.NoAck)
+            if (!_subscriberSettings.NoAck)
                 _subscription.Ack(args);
         }
 
         public void Stop()
             => _enabled = false;
 
-        private ConsumerSettings GetConsumerSettings()
-            => GetType().GetCustomAttributes(typeof(ConsumerSettings), true)
-                        .FirstOrDefault() as ConsumerSettings;
+        private SubscriberSettings GetSubscriberSettings()
+            => GetType().GetCustomAttributes(typeof(SubscriberSettings), true)
+                        .FirstOrDefault() as SubscriberSettings;
 
         public abstract void Consume(MessageReceived<TMessage> message);
     }

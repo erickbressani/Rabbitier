@@ -2,7 +2,7 @@
 
 namespace Rabbitier.Configuration
 {
-    public class ConsumerSettings : Attribute
+    public class SubscriberSettings : Attribute
     {
         public string QueueName { get; }
         public bool NoAck { get; }
@@ -10,7 +10,7 @@ namespace Rabbitier.Configuration
         public ushort PrefetchCount { get; }
         public bool Global { get; }
 
-        public ConsumerSettings(string queueName, bool noAck = false, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
+        public SubscriberSettings(string queueName, bool noAck = false, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
         {
             QueueName = queueName;
             NoAck = noAck;

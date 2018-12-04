@@ -1,11 +1,11 @@
 ﻿using Rabbitier.Configuration;
-using Rabbitier.Consumer;
+using Rabbitier.Subscriber;
 using Sample.Domain;
 
 namespace SampleServer
 {
-    [ConsumerSettings("SampleQueue1")]
-    public class ConcreteConsumerWithAck : RabbitierConsumer<Product>
+    [SubscriberSettings("SampleQueue1", noAck: true)]
+    public class ConcreteSubscriberWithoutAck : RabbitierSubscriber<Product>
     {
         public override void Consume(MessageReceived<Product> message)
         {

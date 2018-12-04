@@ -12,11 +12,11 @@ namespace Rabbitier.Configuration
             _rabbitierConfiguration = new RabbitierConfiguration();
         }
 
-        public Subscription CreateSubscription(ConsumerSettings consumerSettings)
+        public Subscription CreateSubscription(SubscriberSettings subscriberSettings)
         {
             IModel model = CreateModel();
-            model.BasicQos(consumerSettings.PrefetchSize, consumerSettings.PrefetchCount, consumerSettings.Global);
-            return new Subscription(model, consumerSettings.QueueName, consumerSettings.NoAck);
+            model.BasicQos(subscriberSettings.PrefetchSize, subscriberSettings.PrefetchCount, subscriberSettings.Global);
+            return new Subscription(model, subscriberSettings.QueueName, subscriberSettings.NoAck);
         }
 
         public IModel CreateModel()

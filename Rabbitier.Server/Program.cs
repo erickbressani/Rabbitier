@@ -4,8 +4,8 @@
     {
         static void Main(string[] args)
         {
-            var consumer = new ConcreteConsumerWithoutAck();
-            consumer.Start();
+            var subscriber = new ConcreteSubscriberWithoutAck();
+            subscriber.Start();
         }
     }
 }

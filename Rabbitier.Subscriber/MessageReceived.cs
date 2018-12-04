@@ -1,7 +1,7 @@
 ﻿using Rabbitier.Configuration.Parsers;
 using RabbitMQ.Client.Events;
 
-namespace Rabbitier.Consumer
+namespace Rabbitier.Subscriber
 {
     public class MessageReceived<TMessage> where TMessage : new()
     {

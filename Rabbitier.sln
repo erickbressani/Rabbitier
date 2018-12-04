@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbitier.Publisher", "Rabbitier.Sender\Rabbitier.Publisher.csproj", "{CDB00F23-5C2B-4B6E-8D82-1AC19B1CC89E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbitier.Consumer", "Rabbitier.Consumer\Rabbitier.Consumer.csproj", "{00E1B03E-1724-4012-A700-85B22B70CE09}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbitier.Configuration", "Rabbitier.Configuration\Rabbitier.Configuration.csproj", "{7E8B3B65-5FC2-4EE0-9B50-69512333B670}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Domain", "Sample.Domain\Sample.Domain.csproj", "{8527BAC6-5798-43AB-9426-A0452EFD8301}"
@@ -14,6 +12,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Server", "Rabbitier.Server\Sample.Server.csproj", "{2A54FF9F-3A1E-4E51-A969-92A7397747A9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Client", "Sample.Client\Sample.Client.csproj", "{1B68E224-CDB4-4EEE-97CB-71CFD74D8BB7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbitier.Subscriber", "Rabbitier.Subscriber\Rabbitier.Subscriber.csproj", "{6C81E089-242B-4E99-B298-97391F1FFF91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{CDB00F23-5C2B-4B6E-8D82-1AC19B1CC89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDB00F23-5C2B-4B6E-8D82-1AC19B1CC89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDB00F23-5C2B-4B6E-8D82-1AC19B1CC89E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00E1B03E-1724-4012-A700-85B22B70CE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00E1B03E-1724-4012-A700-85B22B70CE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00E1B03E-1724-4012-A700-85B22B70CE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00E1B03E-1724-4012-A700-85B22B70CE09}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E8B3B65-5FC2-4EE0-9B50-69512333B670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7E8B3B65-5FC2-4EE0-9B50-69512333B670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E8B3B65-5FC2-4EE0-9B50-69512333B670}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{1B68E224-CDB4-4EEE-97CB-71CFD74D8BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B68E224-CDB4-4EEE-97CB-71CFD74D8BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B68E224-CDB4-4EEE-97CB-71CFD74D8BB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C81E089-242B-4E99-B298-97391F1FFF91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C81E089-242B-4E99-B298-97391F1FFF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C81E089-242B-4E99-B298-97391F1FFF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C81E089-242B-4E99-B298-97391F1FFF91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

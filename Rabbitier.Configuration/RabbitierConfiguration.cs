@@ -18,6 +18,15 @@ namespace Rabbitier.Configuration
             HostName = config["Rabbitier:HostName"];
             UserName = config["Rabbitier:UserName"];
             Password = config["Rabbitier:Password"];
+            VirtualHost = config["Rabbitier:VirtualHost"];
+
+            string port = config["Rabbitier:Port"];
+
+            if (!string.IsNullOrEmpty(port))
+            {
+                int.TryParse(port, out int parsedPort);
+                Port = parsedPort;
+            }
         }
     }
 }

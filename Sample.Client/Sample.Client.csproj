@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rabbitier.Sender\Rabbitier.Publisher.csproj" />
+    <ProjectReference Include="..\Rabbitier.Publisher\Rabbitier.Publisher.csproj" />
     <ProjectReference Include="..\Sample.Domain\Sample.Domain.csproj" />
   </ItemGroup>
 

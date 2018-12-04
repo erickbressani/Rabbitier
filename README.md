@@ -1,5 +1,5 @@
 # Rabbitier
-An easy to use abstraction for RabbitMQ Publishers and Subscribers
+An easy to use abstraction for RabbitMQ Publishers and Subscribers for .Net Core
 
 ## RabbitierPublisher
 Fluent RabbitMQ Publisher

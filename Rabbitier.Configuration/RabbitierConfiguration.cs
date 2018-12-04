@@ -1,4 +1,6 @@
-﻿namespace Rabbitier.Configuration
+﻿using Microsoft.Extensions.Configuration;
+
+namespace Rabbitier.Configuration
 {
     internal class RabbitierConfiguration
     {
@@ -10,7 +12,12 @@
 
         public RabbitierConfiguration()
         {
+            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json")
+                                                   .Build();
 
+            HostName = config["Rabbitier:HostName"];
+            UserName = config["Rabbitier:UserName"];
+            Password = config["Rabbitier:Password"];
         }
     }
 }

@@ -4,8 +4,8 @@ using Sample.Domain;
 
 namespace SampleServer
 {
-    [ConsumerSettings("SampleQueue1")]
-    public class ConcreteConsumer : RabbitierConsumer<Product>
+    [ConsumerSettings("SampleQueue1", noAck: true)]
+    public class ConcreteConsumer2 : RabbitierConsumer<Product>
     {
         public override void Consume(MessageReceived<Product> message)
         {

@@ -36,9 +36,7 @@ namespace Rabbitier.Consumer
             {
                 BasicDeliverEventArgs args = _subscription.Next();
                 Consume(args);
-
-                if (!_consumerSettings.NoAck)
-                    _subscription.Ack(args);
+                AcknowledgeIfNecessary(args);
             }
         }
 
@@ -46,6 +44,12 @@ namespace Rabbitier.Consumer
         {
             var messageReceived = new MessageReceived<TMessage>(args);
             Consume(messageReceived);
+        }
+
+        private void AcknowledgeIfNecessary(BasicDeliverEventArgs args)
+        {
+            if (!_consumerSettings.NoAck)
+                _subscription.Ack(args);
         }
 
         public void Stop()

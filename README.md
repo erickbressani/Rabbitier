@@ -80,7 +80,7 @@ subscriber.Start();
 
 Stoping the Subscriber
 ```
-var subscriber = new ConcreteSubscriberWithoutAck();
+...
 subscriber.Stop();
 ```
 

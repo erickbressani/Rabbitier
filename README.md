@@ -1,10 +1,10 @@
 # Rabbitier
 An easy to use abstraction to create a RabbitMQ Publishers and Subscribers for .Net Core
 
-# RabbitierPublisher
+## RabbitierPublisher
 Fluent RabbitMQ Publisher
   
-## Usage
+### Usage
 
 One way publisher, send the message direct to a queue:
 ```
@@ -35,10 +35,10 @@ Additional settings:
                    .Publish();
 ```
 
-# RabbitierSubscriber
+## RabbitierSubscriber
 Subscriber Abstraction for RabbitMQ
   
-## Usage
+### Usage
 
 In order to create any subscriber your subscriber class just have to inherite from RabbitierSubscriber<TMessage> and add the custom attribute [SubscriberSettings(string queueName)]
   
@@ -95,7 +95,7 @@ Parameter: MessageReceived<TMessage>
                 ulong DeliveryTag
                 bool Redelivered
   
-# Configuration
+## Configuration
 In order to work, your client needs to have an appsettings.json with the following settings:
 ```
 ...

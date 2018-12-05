@@ -6,7 +6,7 @@ Fluent RabbitMQ Publisher
   
 ### Usage
 
-One way publisher, send the message direct to a queue:
+One way based publisher, send the message direct to a queue:
 ```
 RabbitierPublisher.CreateWith()
                   .RoutingKey("QueueName")
@@ -14,13 +14,24 @@ RabbitierPublisher.CreateWith()
                   .Publish();
 ```
 
-Topic publisher, send the message based on a topic route:
+Topic based publisher:
 ```
 RabbitierPublisher.CreateWith()
                   .Exchange("ExchangeName")
                   .RoutingKey("Topic1", "Topic2", "Topic3") //Accept any object, concatenates with "."
                   .Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
                   .Publish();
+```
+
+Header based publisher:
+```
+RabbitierPublisher.CreateWith()
+	     	  .Exchange("ExchangeName")
+	     	  .Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
+	     	  .AddHeader("Key1", "Value1")
+	     	  .AddHeader("Key2", "Value2")
+	     	  .AddHeader("Key3", "Value3")
+	     	  .Publish();
 ```
 
 Additional settings: 

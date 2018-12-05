@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Rabbitier.Publisher
 {
-    public class RabbitierPublisher
+    public class RabbitierPublisher : IRabbitierPublisher
     {
         private PublishData _publishData;
 
@@ -15,67 +15,67 @@ namespace Rabbitier.Publisher
             _publishData = new PublishData();
         }
 
-        public static RabbitierPublisher CreateWith()
+        public static IRabbitierPublisher CreateWith()
             => new RabbitierPublisher();
 
-        public RabbitierPublisher Exchange(string exchange)
+        public IRabbitierPublisher Exchange(string exchange)
         {
             _publishData.Exchange = exchange;
             return this;
         }
 
-        public RabbitierPublisher RoutingKey(object routingKey)
+        public IRabbitierPublisher RoutingKey(object routingKey)
             => RoutingKey(routingKey.ToString());
 
-        public RabbitierPublisher RoutingKey(string routingKey)
+        public IRabbitierPublisher RoutingKey(string routingKey)
         {
             _publishData.RoutingKey = routingKey;
             return this;
         }
 
-        public RabbitierPublisher RoutingKey(params object[] routingKey)
+        public IRabbitierPublisher RoutingKey(params object[] routingKey)
         {
             _publishData.RoutingKey = string.Join('.', routingKey);
             return this;
         }
 
-        public RabbitierPublisher IsMandatory()
+        public IRabbitierPublisher IsMandatory()
         {
             _publishData.Mandatory = true;
             return this;
         }
 
-        public RabbitierPublisher IsPersistent()
+        public IRabbitierPublisher IsPersistent()
         {
             _publishData.IsPersistent = true;
             return this;
         }
 
-        public Publisher Body(object body)
+        public ISender Body(object body)
         {
             var parsedBody = Json.ParseToJson(body);
             return Body(parsedBody);
         }
 
-        public Publisher Body(string body)
+        public ISender Body(string body)
         {
             var parsedBody = Encoding.Default.GetBytes(body);
             return Body(parsedBody);
         }
 
-        public Publisher Body(byte[] body)
+        public ISender Body(byte[] body)
         {
             _publishData.Body = body;
-            return new Publisher(_publishData);
+            return new Sender(_publishData);
         }
 
-        public class Publisher
+        public class Sender : ISender
         {
             private PublishData _publishData;
             private IModel _model;
             private IBasicProperties _properties;
 
-            internal Publisher(PublishData publishData)
+            internal Sender(PublishData publishData)
             {
                 var rabbitierConnector = new RabbitierConnector();
                 _model = rabbitierConnector.CreateModel();
@@ -89,13 +89,13 @@ namespace Rabbitier.Publisher
                 _publishData.Headers.ForEach(_properties.Headers.Add);
             }
 
-            public Publisher AddHeader(KeyValuePair<string, object> header)
+            public ISender AddHeader(KeyValuePair<string, object> header)
             {
                 _publishData.Headers.Add(header);
                 return this;
             }
 
-            public Publisher AddHeader(string key, object value)
+            public ISender AddHeader(string key, object value)
             {
                 var header = new KeyValuePair<string, object>(key, value);
                 return AddHeader(header);

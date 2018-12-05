@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>Erick Bressani</Authors>
+    <Company>Erick Bressani</Company>
+    <PackageTags>Rabbitier;</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Erick Bressani</Authors>
+    <Company>Erick Bressani</Company>
+    <PackageTags>Rabbitier;Publisher;RabbitMQ;Fluent</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

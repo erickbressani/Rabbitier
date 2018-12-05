@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Erick Bressani</Authors>
+    <PackageTags>Rabbitier;Subscriber;RabbitMQ</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

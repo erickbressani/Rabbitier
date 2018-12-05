@@ -6,7 +6,7 @@ Fluent RabbitMQ Publisher
   
 ### Usage
 
-One way based publisher, send the message direct to a queue:
+One way based publisher:
 ```
 RabbitierPublisher.CreateWith()
                   .RoutingKey("QueueName")

@@ -108,6 +108,7 @@ Parameter: MessageReceived<TMessage>
 	- Exchange: string 
 	- ConsumerTag: string 
 	- RoutingKey: string 
+	- ReplyTo: string 
 	- DeliveryTag: ulong 
 	- Redelivered: bool 
   

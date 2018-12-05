@@ -8,6 +8,7 @@ namespace Rabbitier.Publisher
         IRabbitierPublisher RoutingKey(object routingKey);
         IRabbitierPublisher RoutingKey(string routingKey);
         IRabbitierPublisher RoutingKey(params object[] routingKey);
+        IRabbitierPublisher ReplyTo(string replyTo);
         IRabbitierPublisher IsMandatory();
         IRabbitierPublisher IsPersistent();
         ISender Body(object body);

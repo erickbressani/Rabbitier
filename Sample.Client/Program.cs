@@ -23,6 +23,7 @@ namespace SampleClient
 
                 RabbitierPublisher.CreateWith()
                                   .RoutingKey("SampleQueue1")
+                                  .ReplyTo("ResponseQueueName")
                                   .Body(product)
                                   .Publish();
 

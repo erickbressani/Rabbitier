@@ -10,6 +10,7 @@ namespace Rabbitier.Subscriber
         public string Exchange { get; }
         public string ConsumerTag { get; }
         public string RoutingKey { get; }
+        public string ReplyTo { get; }
         public ulong DeliveryTag { get; }
         public bool Redelivered { get; }
 
@@ -22,6 +23,7 @@ namespace Rabbitier.Subscriber
             RoutingKey = args.RoutingKey;
             DeliveryTag = args.DeliveryTag;
             Redelivered = args.Redelivered;
+            ReplyTo = args.BasicProperties?.ReplyTo;
         }
     }
 }

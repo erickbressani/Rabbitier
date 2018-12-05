@@ -39,6 +39,12 @@ namespace Rabbitier.Publisher
             return this;
         }
 
+        public IRabbitierPublisher ReplyTo(string replyTo)
+        {
+            _publishData.ReplyTo = replyTo;
+            return this;
+        }
+
         public IRabbitierPublisher IsMandatory()
         {
             _publishData.Mandatory = true;
@@ -86,7 +92,8 @@ namespace Rabbitier.Publisher
             {
                 _properties = _model.CreateBasicProperties();
                 _properties.Persistent = _publishData.IsPersistent;
-                _publishData.Headers.ForEach(_properties.Headers.Add);
+                _properties.ReplyTo = _publishData.ReplyTo;
+                _properties.Headers = _publishData.Headers;
             }
 
             public ISender AddHeader(KeyValuePair<string, object> header)
@@ -102,11 +109,14 @@ namespace Rabbitier.Publisher
             }
 
             public void Publish()
-                => _model.BasicPublish(_publishData.Exchange,
-                                       _publishData.RoutingKey,
-                                       basicProperties: _properties,
-                                       body: _publishData.Body,
-                                       mandatory: _publishData.Mandatory);
+            {
+                SetProperties();
+                _model.BasicPublish(_publishData.Exchange,
+                                    _publishData.RoutingKey,
+                                    basicProperties: _properties,
+                                    body: _publishData.Body,
+                                    mandatory: _publishData.Mandatory);
+            }
         }
     }
 }

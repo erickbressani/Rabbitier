@@ -7,16 +7,18 @@ namespace Rabbitier.Publisher
     {
         public string Exchange { get; set; }
         public string RoutingKey { get; set; }
+        public string ReplyTo { get; set; }
         public bool Mandatory { get; set; }
         public byte[] Body { get; set; }
         public bool IsPersistent { get; set; }
-        public List<KeyValuePair<string, object>> Headers { get; }
+        public IDictionary<string, object> Headers { get; }
 
         public PublishData()
         {
             Exchange = string.Empty;
             RoutingKey = string.Empty;
-            Headers = new List<KeyValuePair<string, object>>();
+            ReplyTo = string.Empty;
+            Headers = new Dictionary<string, object>();
         }
     }
 }

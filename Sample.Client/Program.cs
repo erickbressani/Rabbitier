@@ -22,9 +22,9 @@ namespace SampleClient
                 Console.ReadKey();
 
                 RabbitierPublisher.CreateWith()
-                              .RoutingKey("SampleQueue1")
-                              .Body(product)
-                              .Publish();
+                                  .RoutingKey("SampleQueue1")
+                                  .Body(product)
+                                  .Publish();
 
                 Console.WriteLine();
                 Console.WriteLine($"Message sent: ProductId: {product.Id}");

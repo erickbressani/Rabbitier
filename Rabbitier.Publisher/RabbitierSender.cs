@@ -1,6 +1,7 @@
 ﻿using Rabbitier.Configuration;
 using Rabbitier.Configuration.Parsers;
 using RabbitMQ.Client;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Rabbitier.Publisher
@@ -41,12 +42,6 @@ namespace Rabbitier.Publisher
         public RabbitierPublisher IsMandatory()
         {
             _publishData.Mandatory = true;
-            return this;
-        }
-
-        public RabbitierPublisher IsImmediate()
-        {
-            _publishData.Immediate = true;
             return this;
         }
 
@@ -91,13 +86,27 @@ namespace Rabbitier.Publisher
             {
                 _properties = _model.CreateBasicProperties();
                 _properties.Persistent = _publishData.IsPersistent;
+                _publishData.Headers.ForEach(_properties.Headers.Add);
+            }
+
+            public Publisher AddHeader(KeyValuePair<string, object> header)
+            {
+                _publishData.Headers.Add(header);
+                return this;
+            }
+
+            public Publisher AddHeader(string key, object value)
+            {
+                var header = new KeyValuePair<string, object>(key, value);
+                return AddHeader(header);
             }
 
             public void Publish()
                 => _model.BasicPublish(_publishData.Exchange,
                                        _publishData.RoutingKey,
-                                       _properties,
-                                       _publishData.Body);
+                                       basicProperties: _properties,
+                                       body: _publishData.Body,
+                                       mandatory: _publishData.Mandatory);
         }
     }
 }

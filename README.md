@@ -41,6 +41,7 @@ Additional settings:
                    .IsMandatory() //default is false
                    .IsPersistent() //default is false
 		   .ReplyTo("ResponseQueueName")
+		   .CorrelationId("CorrelationId")
                    ...
                    .Publish();
 ```

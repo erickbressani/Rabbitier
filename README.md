@@ -37,11 +37,11 @@ RabbitierPublisher.CreateWith()
 Additional settings: 
 ```
  RabbitierPublisher.CreateWith()
-                   .Exchange("ExchangeName")
-                   .RoutingKey("RoutingKeyName")
+                   ...
                    .IsMandatory() //default is false
                    .IsPersistent() //default is false
-                   .Body(product)
+		   .ReplyTo("ResponseQueueName")
+                   ...
                    .Publish();
 ```
 
@@ -108,6 +108,7 @@ Parameter: MessageReceived<TMessage>
 	- Exchange: string 
 	- ConsumerTag: string 
 	- RoutingKey: string 
+	- ReplyTo: string 
 	- DeliveryTag: ulong 
 	- Redelivered: bool 
   

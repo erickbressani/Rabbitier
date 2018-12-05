@@ -41,7 +41,6 @@ Additional settings:
                    .RoutingKey("RoutingKeyName")
                    .IsMandatory() //default is false
                    .IsPersistent() //default is false
-                   .IsImmediate() //default is false
                    .Body(product)
                    .Publish();
 ```

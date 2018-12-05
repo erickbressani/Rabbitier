@@ -103,7 +103,7 @@ Method: Consume(MessageReceived<TMessage> message)
 Parameter: MessageReceived<TMessage>
  - Wraps the information send by RabbitMQ
  - Properties:  
-	- JsonParsedBody: TMessage 
+	- ParsedBody: TMessage 
 	- Body: byte[] 
 	- Exchange: string 
 	- ConsumerTag: string 

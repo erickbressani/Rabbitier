@@ -1,5 +1,5 @@
 ﻿using Rabbitier.Configuration;
-using Rabbitier.Configuration.Parsers;
+using Rabbitier.Publisher.Parsers;
 using RabbitMQ.Client;
 using System.Collections.Generic;
 using System.Text;

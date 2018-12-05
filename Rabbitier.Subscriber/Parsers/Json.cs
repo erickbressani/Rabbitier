@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 
-namespace Rabbitier.Configuration.Parsers
+namespace Rabbitier.Subscriber.Parsers
 {
     public static class Json
     {
@@ -15,19 +15,6 @@ namespace Rabbitier.Configuration.Parsers
             catch (JsonException)
             {
                 return default(TMessage);
-            }
-        }
-
-        public static byte[] ParseToJson(object message)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(message);
-                return Encoding.Default.GetBytes(json);
-            }
-            catch (JsonException)
-            {
-                return default(byte[]);
             }
         }
     }

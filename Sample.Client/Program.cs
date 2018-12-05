@@ -1,5 +1,6 @@
 ﻿using Rabbitier.Publisher;
 using Sample.Domain;
+using System;
 
 namespace SampleClient
 {
@@ -7,16 +8,28 @@ namespace SampleClient
     {
         static void Main(string[] args)
         {
-            var product = new Product()
-            {
-                Id = 1,
-                Description = "TestFooBar"
-            };
+            Console.WriteLine($"Make sure to have a Queue named: \"SampleQueue1\" on RabbitMQ");
 
-            RabbitierPublisher.CreateWith()
+            while (true)
+            {
+                var product = new Product()
+                {
+                    Id = new Random().Next(),
+                    Description = "TestFooBar"
+                };
+
+                Console.WriteLine("Press any key to send message");
+                Console.ReadKey();
+
+                RabbitierPublisher.CreateWith()
                               .RoutingKey("SampleQueue1")
                               .Body(product)
                               .Publish();
+
+                Console.WriteLine();
+                Console.WriteLine($"Message sent: ProductId: {product.Id}");
+                Console.WriteLine();
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Rabbitier.Subscriber
 {
     public class MessageReceived<TMessage> where TMessage : new()
     {
-        public TMessage JsonParsedBody { get; }
+        public TMessage ParsedBody { get; }
         public byte[] Body { get; }
         public string Exchange { get; }
         public string ConsumerTag { get; }
@@ -16,7 +16,7 @@ namespace Rabbitier.Subscriber
         internal MessageReceived(BasicDeliverEventArgs args)
         {
             Body = args.Body;
-            JsonParsedBody = Json.Parse<TMessage>(Body);
+            ParsedBody = Json.Parse<TMessage>(Body);
             Exchange = args.Exchange;
             ConsumerTag = args.ConsumerTag;
             RoutingKey = args.RoutingKey;

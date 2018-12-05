@@ -8,9 +8,10 @@ namespace Rabbitier.Publisher
         public string Exchange { get; set; }
         public string RoutingKey { get; set; }
         public string ReplyTo { get; set; }
+        public string CorrelationId { get; set; }
         public bool Mandatory { get; set; }
-        public byte[] Body { get; set; }
         public bool IsPersistent { get; set; }
+        public byte[] Body { get; set; }
         public IDictionary<string, object> Headers { get; }
 
         public PublishData()
@@ -18,6 +19,7 @@ namespace Rabbitier.Publisher
             Exchange = string.Empty;
             RoutingKey = string.Empty;
             ReplyTo = string.Empty;
+            CorrelationId = string.Empty;
             Headers = new Dictionary<string, object>();
         }
     }

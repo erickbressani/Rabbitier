@@ -1,6 +1,7 @@
 ﻿using Rabbitier.Configuration;
 using Rabbitier.Publisher.Parsers;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Collections.Generic;
 using System.Text;
 
@@ -42,6 +43,12 @@ namespace Rabbitier.Publisher
         public IRabbitierPublisher ReplyTo(string replyTo)
         {
             _publishData.ReplyTo = replyTo;
+            return this;
+        }
+
+        public IRabbitierPublisher CorrelationId(string correlationId)
+        {
+            _publishData.CorrelationId = correlationId;
             return this;
         }
 
@@ -94,6 +101,7 @@ namespace Rabbitier.Publisher
                 _properties.Persistent = _publishData.IsPersistent;
                 _properties.ReplyTo = _publishData.ReplyTo;
                 _properties.Headers = _publishData.Headers;
+                _properties.CorrelationId = _publishData.CorrelationId;
             }
 
             public ISender AddHeader(KeyValuePair<string, object> header)

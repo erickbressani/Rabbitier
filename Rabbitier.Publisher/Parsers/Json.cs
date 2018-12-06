@@ -5,7 +5,7 @@ namespace Rabbitier.Publisher.Parsers
 {
     public static class Json
     {
-        public static byte[] ParseToJson(object message)
+        public static byte[] Parse(object message)
         {
             try
             {

@@ -1,7 +1,4 @@
-﻿using RabbitMQ.Client;
-using System.Collections.Generic;
-
-namespace Rabbitier.Publisher
+﻿namespace Rabbitier.Publisher
 {
     internal class PublishData
     {
@@ -12,7 +9,6 @@ namespace Rabbitier.Publisher
         public bool Mandatory { get; set; }
         public bool IsPersistent { get; set; }
         public byte[] Body { get; set; }
-        public IDictionary<string, object> Headers { get; }
 
         public PublishData()
         {
@@ -20,7 +16,6 @@ namespace Rabbitier.Publisher
             RoutingKey = string.Empty;
             ReplyTo = string.Empty;
             CorrelationId = string.Empty;
-            Headers = new Dictionary<string, object>();
         }
     }
 }

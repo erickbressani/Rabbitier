@@ -1,7 +1,6 @@
 ﻿using Rabbitier.Configuration;
 using Rabbitier.Publisher.Parsers;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System.Collections.Generic;
 using System.Text;
 
@@ -46,6 +45,9 @@ namespace Rabbitier.Publisher
             return this;
         }
 
+        public IRabbitierPublisher CorrelationId(object correlationId)
+            => CorrelationId(correlationId.ToString());
+
         public IRabbitierPublisher CorrelationId(string correlationId)
         {
             _publishData.CorrelationId = correlationId;
@@ -66,7 +68,7 @@ namespace Rabbitier.Publisher
 
         public ISender Body(object body)
         {
-            var parsedBody = Json.ParseToJson(body);
+            var parsedBody = Json.Parse(body);
             return Body(parsedBody);
         }
 
@@ -93,6 +95,7 @@ namespace Rabbitier.Publisher
                 var rabbitierConnector = new RabbitierConnector();
                 _model = rabbitierConnector.CreateModel();
                 _publishData = publishData;
+                SetProperties();
             }
 
             private void SetProperties()
@@ -100,13 +103,13 @@ namespace Rabbitier.Publisher
                 _properties = _model.CreateBasicProperties();
                 _properties.Persistent = _publishData.IsPersistent;
                 _properties.ReplyTo = _publishData.ReplyTo;
-                _properties.Headers = _publishData.Headers;
                 _properties.CorrelationId = _publishData.CorrelationId;
+                _properties.Headers = new Dictionary<string, object>();
             }
 
             public ISender AddHeader(KeyValuePair<string, object> header)
             {
-                _publishData.Headers.Add(header);
+                _properties.Headers.Add(header);
                 return this;
             }
 
@@ -118,7 +121,6 @@ namespace Rabbitier.Publisher
 
             public void Publish()
             {
-                SetProperties();
                 _model.BasicPublish(_publishData.Exchange,
                                     _publishData.RoutingKey,
                                     basicProperties: _properties,

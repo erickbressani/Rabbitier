@@ -8,42 +8,46 @@ Fluent RabbitMQ Publisher
 
 One way based publisher:
 ```
-RabbitierPublisher.CreateWith()
-                  .RoutingKey("QueueName")
-                  .Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
-                  .Publish();
+RabbitierPublisher
+	.CreateWith()
+  	.RoutingKey("QueueName")
+  	.Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
+  	.Publish();
 ```
 
 Topic based publisher:
 ```
-RabbitierPublisher.CreateWith()
-                  .Exchange("ExchangeName")
-                  .RoutingKey("Topic1", "Topic2", "Topic3") //Accept any object, concatenates with "."
-                  .Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
-                  .Publish();
+RabbitierPublisher
+	.CreateWith()
+	.Exchange("ExchangeName")
+	.RoutingKey("Topic1", "Topic2", "Topic3") //Accept any object, concatenates with "."
+	.Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
+	.Publish();
 ```
 
 Header based publisher:
 ```
-RabbitierPublisher.CreateWith()
-	     	  .Exchange("ExchangeName")
-	     	  .Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
-	     	  .AddHeader("Key1", "Value1")
-	     	  .AddHeader("Key2", "Value2")
-	     	  .AddHeader("Key3", "Value3")
-	     	  .Publish();
+RabbitierPublisher
+	.CreateWith()
+	.Exchange("ExchangeName")
+	.Body(product) //Accept string, byte[], any object (this early version is only converting object to Json)
+	.AddHeader("Key1", "Value1")
+	.AddHeader("Key2", "Value2")
+	.AddHeader("Key3", "Value3")
+	.Publish();
 ```
 
 Additional settings: 
 ```
- RabbitierPublisher.CreateWith()
-                   ...
-                   .IsMandatory() //default is false
-                   .IsPersistent() //default is false
-		   .ReplyTo("ResponseQueueName")
-		   .CorrelationId("CorrelationId")
-                   ...
-                   .Publish();
+ RabbitierPublisher
+	.CreateWith()
+	...
+	.IsMandatory() //default is false
+	.IsPersistent() //default is false
+	.ReplyTo("ResponseQueueName")
+	.CorrelationId("CorrelationId")
+	...
+	.Publish();
 ```
 
 ## RabbitierSubscriber

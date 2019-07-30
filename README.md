@@ -7,7 +7,7 @@ Fluent RabbitMQ Publisher
 ### Usage
 
 One way based publisher:
-```
+```csharp
 RabbitierPublisher
 	.CreateWith()
   	.RoutingKey("QueueName")
@@ -16,7 +16,7 @@ RabbitierPublisher
 ```
 
 Topic based publisher:
-```
+```csharp
 RabbitierPublisher
 	.CreateWith()
 	.Exchange("ExchangeName")
@@ -26,7 +26,7 @@ RabbitierPublisher
 ```
 
 Header based publisher:
-```
+```csharp
 RabbitierPublisher
 	.CreateWith()
 	.Exchange("ExchangeName")
@@ -38,7 +38,7 @@ RabbitierPublisher
 ```
 
 Additional settings: 
-```
+```csharp
  RabbitierPublisher
 	.CreateWith()
 	...
@@ -57,7 +57,7 @@ Subscriber Abstraction for RabbitMQ
 
 In order to create any subscriber your subscriber class just have to inherite from RabbitierSubscriber<TMessage> and add the custom attribute [SubscriberSettings(string queueName)]
   
-```
+```csharp
 > RabbitierSubscriber<TMessage>: TMessage is the type you want to convert the incoming message (this early version is only converting object from Json)
 	
 > [SubscriberSettings(...)]: Contains all the default parameters from RabbitMQ,
@@ -69,7 +69,7 @@ In order to create any subscriber your subscriber class just have to inherite fr
 ```
 
 Subscriber classes samples:
-```
+```csharp
 [SubscriberSettings("SampleQueue1")]
 public class ConcreteSubscriberWithAck : RabbitierSubscriber<Product>
 {
@@ -90,13 +90,13 @@ public class ConcreteSubscriberWithoutAck : RabbitierSubscriber<Product>
 ```
 
 Starting the Subscriber
-```
+```csharp
 var subscriber = new ConcreteSubscriberWithoutAck();
 subscriber.Start();
 ```
 
 Stoping the Subscriber
-```
+```csharp
 ...
 subscriber.Stop();
 ```
@@ -119,7 +119,7 @@ Parameter: MessageReceived<TMessage>
   
 ## Configuration
 In order to work, your client needs to have an appsettings.json with the following settings:
-```
+```csharp
 ...
 "Rabbitier": {
     "HostName": "localhost", //default localhost

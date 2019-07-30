@@ -119,7 +119,7 @@ Parameter: MessageReceived<TMessage>
   
 ## Configuration
 In order to work, your client needs to have an appsettings.json with the following settings:
-```csharp
+```
 ...
 "Rabbitier": {
     "HostName": "localhost", //default localhost
